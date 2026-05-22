@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Validation -->
+  <data name="InvalidListSize" xml:space="preserve">
+    <value>Bulk issuance list must contain between 1 and 1,000 Professional IDs.</value>
+  </data>
+
+  <!-- Not found — {0} = id -->
+  <data name="IssuerNotFound" xml:space="preserve">
+    <value>Issuer '{0}' not found.</value>
+  </data>
+  <data name="TemplateNotFound" xml:space="preserve">
+    <value>Template '{0}' not found.</value>
+  </data>
+  <data name="JobNotFound" xml:space="preserve">
+    <value>Bulk job '{0}' not found.</value>
+  </data>
+
+  <!-- Authorisation -->
+  <data name="IssuerNotVerified" xml:space="preserve">
+    <value>Only verified issuers can enqueue bulk issuance jobs.</value>
+  </data>
+  <data name="TemplateNotOwnedByIssuer" xml:space="preserve">
+    <value>Template does not belong to this Issuer.</value>
+  </data>
+  <data name="JobAccessDenied" xml:space="preserve">
+    <value>You are not authorized to view this job.</value>
+  </data>
+</root>

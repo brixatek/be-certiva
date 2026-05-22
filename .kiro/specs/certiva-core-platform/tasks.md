@@ -8,65 +8,65 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
 
 ## Tasks
 
-- [ ] 1. Scaffold solution structure and shared infrastructure
-  - [ ] 1.1 Create solution file and all project references
+- [x] 1. Scaffold solution structure and shared infrastructure
+  - [x] 1.1 Create solution file and all project references
     - Create `Certiva.sln` and add projects: `Certiva.Api`, `Certiva.IdentityRegistry`, `Certiva.CertificationEngine`, `Certiva.VerificationEngine`, `Certiva.CertificateWallet`, `Certiva.IssuerPortal`, `Certiva.NotificationSystem`, `Certiva.AuditLog`, `Certiva.Infrastructure`, `Certiva.Tests.Unit`, `Certiva.Tests.Property`, `Certiva.Tests.Integration`
     - Add NuGet packages: EF Core 8, Npgsql EF provider, StackExchange.Redis, MassTransit, QuestPDF, QRCoder, ASP.NET Core Identity, Otp.NET, OpenTelemetry, Serilog, Asp.Versioning, FsCheck.NUnit (or FsCheck.Xunit)
     - Enforce project reference boundaries (each module references only `Certiva.Infrastructure`; no cross-module project references)
     - _Requirements: 20.1, 20.5_
 
-  - [ ] 1.2 Define shared domain primitives and value objects
+  - [x] 1.2 Define shared domain primitives and value objects
     - Create strongly-typed IDs: `ProfessionalId`, `IssuerId`, `CertificateId`, `TemplateId`, `TenantId`, `BulkJobId` (record structs wrapping `Guid`)
     - Create `DomainEvent` base record with `EventId`, `TenantId`, `SequenceNumber`, `OccurredAt`
     - Create `PagedResult<T>` and `Result<T>` types for consistent return values
     - _Requirements: 21.1_
 
-  - [ ] 1.3 Implement `DbContext` and EF Core configuration
+  - [x] 1.3 Implement `DbContext` and EF Core configuration
     - Create `CertivaDbContext` in `Certiva.Infrastructure` with `DbSet` for all entity tables
     - Configure entity mappings: `Professionals`, `Issuers`, `CertificateTemplates`, `Certificates`, `OutboxMessages`, `IdempotencyKeys`, `BulkIssueJobs`, `VerificationLogs`, `AuditLogs`, `NotificationLogs`
     - Apply all indexes and unique constraints from the schema (including `DEFERRABLE INITIALLY DEFERRED` on `uq_active_cert_professional_template`)
     - Configure `AuditLogs` entity as insert-only (no update/delete operations in EF)
     - _Requirements: 14.2, 21.1_
 
-  - [ ] 1.4 Write and apply EF Core migrations
+  - [x] 1.4 Write and apply EF Core migrations
     - Generate initial migration covering all tables and indexes
     - Add database-level `RULE` or trigger on `AuditLogs` to reject `UPDATE`/`DELETE` as defense-in-depth
     - _Requirements: 14.2_
 
-  - [ ] 1.5 Implement Redis connection and `IVerificationStoreRepository`
+  - [x] 1.5 Implement Redis connection and `IVerificationStoreRepository`
     - Configure `StackExchange.Redis` connection with health-check support
     - Implement `RedisVerificationStoreRepository`: `GetAsync`, `UpsertAsync` (with 1-hour TTL), `IsAvailableAsync`
     - Key format: `cert:verify:{tenantId}:{certificateId}`
     - _Requirements: 10.4, 9.1_
 
-  - [ ] 1.6 Implement transactional outbox infrastructure
+  - [x] 1.6 Implement transactional outbox infrastructure
     - Implement `OutboxRelayWorker` (`BackgroundService`): polls `OutboxMessages WHERE Published = false ORDER BY CreatedAt`, publishes to MassTransit, marks `Published = true`
     - Implement `IOutboxWriter` helper used inside EF transactions
     - _Requirements: 1.6, 4.3, 17.4_
 
-  - [ ] 1.7 Implement idempotency key middleware and repository
+  - [x] 1.7 Implement idempotency key middleware and repository
     - Implement `IdempotencyKeyRepository`: check-and-store with 24-hour TTL, using `IdempotencyKeys` table
     - Implement `IdempotencyMiddleware` or service decorator that intercepts requests with `Idempotency-Key` header
     - _Requirements: 4.5, 17.1_
 
-  - [ ] 1.8 Configure MassTransit event bus and define all domain event contracts
+  - [x] 1.8 Configure MassTransit event bus and define all domain event contracts
     - Register all domain event message types: `ProfessionalRegistered`, `IssuerApproved`, `IssuerRejected`, `CertificateIssued`, `CertificateRevoked`, `CertificateExpired`, `QrCodeGenerated`, `PdfGenerated`, `BulkIssueJobEnqueued`
     - Configure retry policies (base 1s, max 60s, 3 retries) and dead-letter queue routing
     - _Requirements: 17.2, 4.9_
 
-  - [ ] 1.9 Implement multi-tenancy middleware
+  - [x] 1.9 Implement multi-tenancy middleware
     - Implement `TenantResolutionMiddleware`: extract `tenant_id` claim from JWT, set `TenantId` on `HttpContext`; return HTTP 400 if absent or unrecognized
     - _Requirements: 21.6_
 
-  - [ ] 1.10 Configure OpenTelemetry, Serilog, and Prometheus metrics
+  - [x] 1.10 Configure OpenTelemetry, Serilog, and Prometheus metrics
     - Wire OpenTelemetry tracing across HTTP, EF Core, MassTransit, and Redis
     - Configure Serilog JSON formatter for structured logs
     - Expose `/metrics` Prometheus scrape endpoint
     - _Requirements: 18.1, 18.2, 18.3, 18.5_
 
 
-- [ ] 2. Implement IdentityRegistry module
-  - [ ] 2.1 Implement `INationalIdMaskingService`
+- [x] 2. Implement IdentityRegistry module
+  - [x] 2.1 Implement `INationalIdMaskingService`
     - Implement `NationalIdMaskingService.Mask(string nationalId)`: if `length <= 4` return all asterisks; otherwise return `(length-4)` asterisks + last 4 chars
     - Apply masking in every response mapper that includes Professional data
     - _Requirements: 1.7, 16.3_
@@ -77,7 +77,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 1.7, 16.3**
     - `// Feature: certiva-core-platform, Property 1: NationalId Masking Is Applied Universally`
 
-  - [ ] 2.3 Implement Professional registration
+  - [x] 2.3 Implement Professional registration
     - Implement `RegisterProfessionalAsync`: validate Name (≤100 chars, non-empty), NationalId (6–20 alphanumeric), Phone (E.164), Email (RFC 5322), at least one of Phone/Email present
     - Encrypt NationalId and contact fields with AES-256; store `NationalId_Hash` (SHA-256) for dedup
     - Insert Professional + OutboxMessage (`ProfessionalRegistered`) in one transaction
@@ -96,7 +96,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 1.3, 1.4, 1.5**
     - `// Feature: certiva-core-platform, Property 3: Professional Registration Field Validation`
 
-  - [ ] 2.6 Implement Issuer onboarding and approval/rejection
+  - [x] 2.6 Implement Issuer onboarding and approval/rejection
     - Implement `OnboardIssuerAsync`: create Issuer with `VerificationStatus = Pending`; enforce case-insensitive `OrganizationName` uniqueness per tenant (HTTP 409 on duplicate)
     - Implement `ApproveIssuerAsync`: transition to Verified, write AuditLog, publish `IssuerApproved` via outbox; return HTTP 409 if already Verified
     - Implement `RejectIssuerAsync`: transition to Rejected, write AuditLog, publish `IssuerRejected` via outbox; return HTTP 409 if already Rejected
@@ -114,7 +114,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 2.7**
     - `// Feature: certiva-core-platform, Property 6: Issuer State Transition Idempotency`
 
-  - [ ] 2.9 Implement authentication service (JWT, refresh tokens, MFA)
+  - [x] 2.9 Implement authentication service (JWT, refresh tokens, MFA)
     - Implement `AuthenticateAsync`: validate credentials, check MFA TOTP if enabled (±30s window), issue JWT (15-min expiry) + refresh token (7-day expiry)
     - Implement `RefreshTokenAsync`: validate refresh token, issue new pair, invalidate old refresh token
     - Implement `RevokeSessionAsync`: invalidate refresh token
@@ -127,7 +127,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 15.2, 15.4, 15.5**
     - `// Feature: certiva-core-platform, Property 40: Authentication Error Conditions`
 
-  - [ ] 2.11 Implement RBAC authorization policies
+  - [x] 2.11 Implement RBAC authorization policies
     - Define `AdminPolicy`, `IssuerPolicy`, `WorkerPolicy` using JWT role claims
     - Apply policies to all protected endpoints
     - _Requirements: 15.6, 15.7, 15.8, 15.9_
@@ -143,7 +143,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
   - Ensure all IdentityRegistry unit, property, and integration tests pass. Verify Professional registration, Issuer onboarding, auth, and RBAC. Ask the user if questions arise.
 
 - [ ] 4. Implement CertificationEngine module
-  - [ ] 4.1 Implement `ICanonicalSerializationService`
+  - [x] 4.1 Implement `ICanonicalSerializationService`
     - Serialize `CertificateFields` as alphabetically ordered JSON, no whitespace, UTF-8
     - Fields: `certificateId`, `expiryDate`, `issuerId`, `issuerName`, `issueDate`, `name`, `professionalId`, `tenantId`
     - _Requirements: 19.2_
@@ -154,7 +154,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 19.2**
     - `// Feature: certiva-core-platform, Property 13: Canonical Serialization Determinism`
 
-  - [ ] 4.3 Implement `ICertificateHashService`
+  - [x] 4.3 Implement `ICertificateHashService`
     - Implement `ComputeHash(fields, previousHash)`: `SHA256(Canonical(fields) + previousHash)`
     - Implement `GetGenesisHash()`: 64 hex zeros
     - Implement `VerifyChain(chain)`: recompute each hash and compare to stored value
@@ -166,7 +166,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 4.2, 19.1, 19.2, 19.4**
     - `// Feature: certiva-core-platform, Property 12: Certificate Hash Chain Integrity`
 
-  - [ ] 4.5 Implement individual certificate issuance
+  - [x] 4.5 Implement individual certificate issuance
     - Implement `IssueCertificateAsync`: validate ProfessionalId (HTTP 404), TemplateId (HTTP 404), Issuer ownership (HTTP 403), Issuer verified (HTTP 403), no duplicate Active cert (HTTP 409)
     - Compute `ExpiryDate = IssueDate + ValidityPeriodDays` (null if `ValidityPeriodDays = 0`)
     - Compute `CertificateHash` using `ICertificateHashService`
@@ -198,7 +198,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 2.4, 3.5**
     - `// Feature: certiva-core-platform, Property 4: Unverified Issuer Cannot Issue or Manage Templates`
 
-  - [ ] 4.10 Implement certificate revocation
+  - [x] 4.10 Implement certificate revocation
     - Implement `RevokeCertificateAsync`: validate certificate exists (HTTP 404), Issuer ownership (HTTP 403), status not already Revoked/Expired (HTTP 409), revocation reason present (HTTP 422)
     - Update Status to Revoked, write AuditLog, publish `CertificateRevoked` via outbox in one transaction
     - _Requirements: 6.1, 6.2, 6.4, 6.5, 6.6, 6.7, 6.10_
@@ -215,11 +215,11 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 6.6**
     - `// Feature: certiva-core-platform, Property 21: Cross-Issuer Revocation Authorization`
 
-  - [ ] 4.13 Implement certificate expiry scheduler
+  - [x] 4.13 Implement certificate expiry scheduler
     - Implement `CertificateExpiryScheduler` (`BackgroundService`): runs every ≤60 minutes, queries certificates where `ExpiryDate <= NOW() AND Status = 'Active'`, updates Status to Expired, writes OutboxMessage (`CertificateExpired`) per certificate in batched transactions
     - _Requirements: 6.8_
 
-  - [ ] 4.14 Implement hash verification endpoint logic
+  - [x] 4.14 Implement hash verification endpoint logic
     - Implement `VerifyCertificateHashAsync`: recompute hash from stored fields + preceding hash; return match/mismatch status, stored hash, recomputed hash
     - If mismatch: update Status to Tampered, write AuditLog entry with `CertificateId`, stored hash, recomputed hash, detection timestamp
     - _Requirements: 19.3, 19.4, 19.5_
@@ -244,7 +244,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
 
 
 - [ ] 5. Implement QR code and PDF generation workers
-  - [ ] 5.1 Implement QR code generation consumer
+  - [x] 5.1 Implement QR code generation consumer
     - Implement `QrCodeGeneratedConsumer`: subscribes to `CertificateIssued`; generates QR PNG (≥200×200 px, auto-version) encoding `https://{domain}/verify/{CertificateId}`; stores URL string and base64 PNG on Certificate record; publishes `QrCodeGenerated`
     - Retry up to 3 times with exponential backoff (5s, 25s, 125s); on exhaustion write AuditLog and move to dead-letter
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7_
@@ -261,7 +261,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 7.7**
     - `// Feature: certiva-core-platform, Property 23: QR Code Image Minimum Resolution`
 
-  - [ ] 5.4 Implement PDF generation consumer
+  - [x] 5.4 Implement PDF generation consumer
     - Implement `PdfGeneratedConsumer`: subscribes to `QrCodeGenerated`; generates PDF via QuestPDF containing Professional Name, certificate Name, IssueDate, ExpiryDate (or "Does not expire"), IssuerName, embedded QR image; stores PDF in blob storage; publishes `PdfGenerated`
     - Retry rendering errors up to 3 times (5s, 25s, 125s); on exhaustion write AuditLog and dead-letter
     - Retry infrastructure/timeout errors indefinitely with same backoff (no dead-letter for infrastructure failures)
@@ -277,7 +277,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
   - Ensure all CertificationEngine and worker unit, property, and integration tests pass. Verify issuance, revocation, hash chain, QR, and PDF. Ask the user if questions arise.
 
 - [ ] 7. Implement VerificationEngine module
-  - [ ] 7.1 Implement verification resolution with Redis/PostgreSQL fallback
+  - [x] 7.1 Implement verification resolution with Redis/PostgreSQL fallback
     - Implement `VerifyCertificateAsync`: check `IVerificationStoreRepository.IsAvailableAsync()`; if available, attempt Redis lookup; on miss or Redis unavailable, fall back to PostgreSQL; repopulate Redis on fallback hit (1-hour TTL)
     - Return `valid: false` for Revoked/Expired; return HTTP 404 for non-existent CertificateId (write AuditLog)
     - Record `VerificationLog` entry on every request
@@ -303,7 +303,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 16.4**
     - `// Feature: certiva-core-platform, Property 42: Contact Details Masked in Verification Responses`
 
-  - [ ] 7.5 Implement `CertificateIssued`/`CertificateRevoked`/`CertificateExpired` consumers in VerificationEngine
+  - [x] 7.5 Implement `CertificateIssued`/`CertificateRevoked`/`CertificateExpired` consumers in VerificationEngine
     - Implement consumers that upsert `CertificateVerificationView` in Redis on each event
     - Enforce sequence number ordering: apply event only if `event.SequenceNumber == lastApplied + 1`; discard and write AuditLog for out-of-order events
     - Track `LastAppliedSequence` per `CertificateId` in Redis (`seq:{tenantId}:{certificateId}`)
@@ -315,7 +315,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 17.3**
     - `// Feature: certiva-core-platform, Property 43: Ordered Event Processing`
 
-  - [ ] 7.7 Implement Verification_Store resynchronization
+  - [x] 7.7 Implement Verification_Store resynchronization
     - Implement `ResynchronizeVerificationStoreAsync`: on Redis restoration (health check), bulk-upsert all `CertificateVerificationView` records from PostgreSQL within 5-minute deadline; resume Redis reads after deadline regardless of completion; retry every 30 minutes on failure
     - _Requirements: 10.2, 10.3, 10.5_
 
@@ -333,7 +333,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
 
 
 - [ ] 8. Implement CertificateWallet module
-  - [ ] 8.1 Implement wallet certificate list and detail
+  - [x] 8.1 Implement wallet certificate list and detail
     - Implement `GetCertificatesAsync`: query all certificates for `ProfessionalId + TenantId`; group by Status (`[Active, Expired, Revoked]`), sort by `IssueDate DESC` within each group; set `expiryWarning: true` where `ExpiryDate != null AND ExpiryDate <= today + 30 days`
     - Implement `GetCertificateDetailAsync`: return full detail including `QRCodeValue` and PDF download link; return HTTP 403 if `ProfessionalId` mismatch
     - Return HTTP 200 with empty list when no certificates exist
@@ -357,7 +357,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 11.6**
     - `// Feature: certiva-core-platform, Property 31: Cross-Professional Wallet Access Authorization`
 
-  - [ ] 8.5 Implement signed PDF download URL generation
+  - [x] 8.5 Implement signed PDF download URL generation
     - Implement `GetPdfDownloadUrlAsync`: generate HMAC-SHA256 signed URL over `{CertificateId}:{ExpiresAt}` with 15-minute expiry; return HTTP 202 with job state if PDF not yet generated
     - Implement URL validation endpoint: reject requests after expiry time
     - _Requirements: 8.4, 8.5_
@@ -374,7 +374,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 8.4**
     - `// Feature: certiva-core-platform, Property 25: PDF Download Authorization`
 
-  - [ ] 8.6 Implement shareable link generation
+  - [x] 8.6 Implement shareable link generation
     - Implement `GetShareableLinkAsync`: return `https://{domain}/verify/{CertificateId}`
     - _Requirements: 11.3_
 
@@ -385,7 +385,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - `// Feature: certiva-core-platform, Property 32: Shareable Link Format`
 
 - [ ] 9. Implement IssuerPortal module
-  - [ ] 9.1 Implement certification template management
+  - [x] 9.1 Implement certification template management
     - Implement `CreateTemplateAsync`: validate Name (≤100 chars), `ValidityPeriodDays` (non-negative), `IssuerId` present; enforce case-insensitive name uniqueness per Issuer+Tenant (HTTP 409); reject if Issuer not Verified (HTTP 403)
     - Implement `UpdateTemplateAsync`: apply update prospectively only; do not alter existing certificates
     - Implement `DeactivateTemplateAsync`: mark `IsActive = false`; prevent selection for new issuance
@@ -415,7 +415,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 3.4**
     - `// Feature: certiva-core-platform, Property 9: Template Updates Do Not Retroactively Alter Certificates`
 
-  - [ ] 9.6 Implement bulk issuance job enqueueing and status polling
+  - [x] 9.6 Implement bulk issuance job enqueueing and status polling
     - Implement `EnqueueBulkIssueAsync`: validate list size 1–1000 (HTTP 422 otherwise); persist `BulkIssueJob` with status Queued; publish `BulkIssueJobEnqueued` via outbox; return `JobId`
     - Implement `GetBulkJobStatusAsync`: return current status, `TotalCount`, `ProcessedCount`, `SuccessCount`, `FailureCount`; support lookup by `IssuerId + submittedAt` as alternative
     - _Requirements: 5.1, 5.2, 5.3, 5.4_
@@ -426,7 +426,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 5.2**
     - `// Feature: certiva-core-platform, Property 16: Bulk Issuance Boundary Validation`
 
-  - [ ] 9.8 Implement bulk issuance job processor consumer
+  - [x] 9.8 Implement bulk issuance job processor consumer
     - Implement `BulkIssueJobConsumer`: subscribes to `BulkIssueJobEnqueued`; updates job to Processing; iterates entries calling `IssueCertificateAsync` with same idempotency rules; accumulates success/failure counts; on completion update to Completed with result report; on full failure update to Failed and write AuditLog
     - Continue processing remaining entries on individual failure (no batch abort)
     - _Requirements: 5.5, 5.6, 5.7, 5.8_
@@ -443,7 +443,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 5.5**
     - `// Feature: certiva-core-platform, Property 18: Bulk Issuance Applies Individual Idempotency Rules`
 
-  - [ ] 9.11 Implement analytics queries
+  - [x] 9.11 Implement analytics queries
     - Implement `GetAnalyticsAsync`: certificate counts by Status; monthly issuance for trailing 12 months; all queries scoped to `IssuerId + TenantId`
     - Implement `SearchProfessionalsAsync`: case-insensitive partial Name match or exact NationalId match; scoped to requesting Issuer's certificates; return empty list (HTTP 200) when no matches
     - _Requirements: 13.1, 13.2, 13.3, 13.4_
@@ -468,7 +468,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
 
 
 - [ ] 10. Implement NotificationSystem module
-  - [ ] 10.1 Implement notification dispatch consumers
+  - [x] 10.1 Implement notification dispatch consumers
     - Implement `CertificateIssuedNotificationConsumer`: subscribes to `CertificateIssued`; check idempotency key (`SHA256(eventId + "Issuance")`); if Professional has Email, dispatch issuance alert within 5 minutes; if no Email, skip and write AuditLog
     - Implement `CertificateRevokedNotificationConsumer`: same pattern for revocation alerts
     - Retry up to 3 times with exponential backoff (5s initial, capped at 60s); on exhaustion write single AuditLog failure entry
@@ -480,12 +480,12 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 12.8**
     - `// Feature: certiva-core-platform, Property 33: Notification Idempotency`
 
-  - [ ] 10.3 Implement expiry reminder scheduler
+  - [x] 10.3 Implement expiry reminder scheduler
     - Implement `ExpiryReminderScheduler` (`BackgroundService`): runs daily; query certificates where `ExpiryDate = today + 30` and `ExpiryDate = today + 7`; dispatch reminders with idempotency keys; skip if no Email
     - _Requirements: 12.3, 12.4_
 
 - [ ] 11. Implement AuditLog module
-  - [ ] 11.1 Implement `IAuditLogService`
+  - [x] 11.1 Implement `IAuditLogService`
     - Implement `WriteAsync`: compute `RecordHash = SHA256(actionType + entityId + timestamp.ToString("O") + actor + metadataJson)`; insert record (insert-only, no update/delete); reject originating action if write fails (for security events, always reject; for non-security, reject per Req 14.7)
     - Implement `QueryAsync`: filter by `ActionType`, `EntityId`, `Actor`, date range; paginate at ≤100 records per page
     - Implement `ExportCsvAsync`: stream CSV with `ActionType`, `EntityId`, `Timestamp`, `Actor`, `Metadata` columns
@@ -513,7 +513,7 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
   - Ensure all module unit, property, and integration tests pass. Verify verification fallback, wallet grouping, bulk issuance, notifications, and audit log integrity. Ask the user if questions arise.
 
 - [ ] 13. Implement API host, versioning, and health probes
-  - [ ] 13.1 Configure ASP.NET Core host and register all module services
+  - [x] 13.1 Configure ASP.NET Core host and register all module services
     - Register all module services, repositories, and consumers via DI in `Certiva.Api`
     - Configure `Asp.Versioning` for `/api/v{major}` routing; register `/api/versions` endpoint returning supported versions, status, and sunset dates
     - Return HTTP 410 for removed versions; include `Deprecation` and `Sunset` headers for deprecated versions
@@ -531,21 +531,21 @@ Implement the Certiva Phase 1 Digital Certification & Verification Infrastructur
     - **Validates: Requirements 22.5**
     - `// Feature: certiva-core-platform, Property 50: Removed API Version Returns 410`
 
-  - [ ] 13.4 Implement all API controllers/minimal API endpoints
+  - [x] 13.4 Implement all API controllers/minimal API endpoints
     - Wire all endpoint groups to their module services: `/api/v1/professionals`, `/api/v1/issuers`, `/api/v1/auth`, `/api/v1/certificates`, `/api/v1/certificates/bulk`, `/api/v1/verify/{id}`, `/api/v1/wallet`, `/api/v1/templates`, `/api/v1/analytics`, `/api/v1/audit`
     - Apply `TenantResolutionMiddleware`, auth policies, and rate limiting middleware to appropriate endpoints
     - _Requirements: 9.4, 15.6, 15.7, 15.8, 15.9, 21.6_
 
-  - [ ] 13.5 Implement liveness and readiness health probes
+  - [x] 13.5 Implement liveness and readiness health probes
     - Implement `/health/live`: return HTTP 200 if PostgreSQL reachable; HTTP 503 otherwise
     - Implement `/health/ready`: return HTTP 200 only after startup initialization complete (Redis check, config validation) within 60-second timeout; HTTP 503 otherwise
     - _Requirements: 20.3, 20.4_
 
-  - [ ] 13.6 Implement environment variable validation at startup
+  - [x] 13.6 Implement environment variable validation at startup
     - On startup, validate all required environment variables (DB connection string, Redis endpoint, Event Bus connection, JWT signing key, blob storage config); log descriptive error and exit with non-zero code if any missing
     - _Requirements: 20.5, 20.6_
 
-  - [ ] 13.7 Implement structured log emission for certificate operations
+  - [x] 13.7 Implement structured log emission for certificate operations
     - Ensure every certificate issuance, revocation, and expiry transition emits a JSON-formatted log entry with `CertificateId`, `ProfessionalId`, `IssuerId`, `Timestamp`, and `operationType` fields via Serilog
     - _Requirements: 18.1_
 

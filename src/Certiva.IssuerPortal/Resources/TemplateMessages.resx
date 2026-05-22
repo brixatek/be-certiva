@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Validation -->
+  <data name="NameInvalid" xml:space="preserve">
+    <value>Template name is required and must not exceed 100 characters.</value>
+  </data>
+  <data name="ValidityInvalid" xml:space="preserve">
+    <value>ValidityPeriodDays must be non-negative.</value>
+  </data>
+
+  <!-- Not found — {0} = IssuerId or TemplateId -->
+  <data name="IssuerNotFound" xml:space="preserve">
+    <value>Issuer '{0}' not found.</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Template '{0}' not found.</value>
+  </data>
+
+  <!-- Authorisation -->
+  <data name="IssuerNotVerified" xml:space="preserve">
+    <value>Only verified issuers can create certificate templates.</value>
+  </data>
+  <data name="UpdateNotAuthorized" xml:space="preserve">
+    <value>You are not authorized to update this template.</value>
+  </data>
+  <data name="DeactivateNotAuthorized" xml:space="preserve">
+    <value>You are not authorized to deactivate this template.</value>
+  </data>
+
+  <!-- Conflict — {0} = template name -->
+  <data name="DuplicateName" xml:space="preserve">
+    <value>A template named '{0}' already exists for this issuer.</value>
+  </data>
+</root>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Not found — {0} = CertificateId -->
+  <data name="CertificateNotFound" xml:space="preserve">
+    <value>Certificate '{0}' not found.</value>
+  </data>
+
+  <!-- Authorisation -->
+  <data name="AccessDenied" xml:space="preserve">
+    <value>You are not authorized to access this certificate.</value>
+  </data>
+  <data name="PdfAccessDenied" xml:space="preserve">
+    <value>You are not authorized to download this PDF.</value>
+  </data>
+  <data name="ShareAccessDenied" xml:space="preserve">
+    <value>You are not authorized to share this certificate.</value>
+  </data>
+
+  <!-- Status -->
+  <data name="PdfNotReady" xml:space="preserve">
+    <value>PDF generation is in progress. Please retry shortly.</value>
+  </data>
+</root>

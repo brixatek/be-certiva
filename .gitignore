@@ -1,0 +1,46 @@
+# Build output
+bin/
+obj/
+out/
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# Rider
+.idea/
+*.DotSettings.user
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Secrets & local config
+appsettings.Local.json
+appsettings.*.local.json
+*.pfx
+*.p12
+secrets.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test output
+TestResults/
+coverage/
+*.coveragexml
+*.trx
+
+# Docker
+.dockerignore
+
+# Claude Code internal memory (not project files)
+.claude/

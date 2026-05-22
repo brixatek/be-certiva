@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Not found — {0} = entity id, {1} = tenantId -->
+  <data name="ProfessionalNotFound" xml:space="preserve">
+    <value>Professional '{0}' not found in tenant '{1}'.</value>
+  </data>
+  <data name="TemplateNotFound" xml:space="preserve">
+    <value>Template '{0}' not found in tenant '{1}'.</value>
+  </data>
+  <data name="IssuerNotFound" xml:space="preserve">
+    <value>Issuer '{0}' not found in tenant '{1}'.</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Certificate '{0}' not found in tenant '{1}'.</value>
+  </data>
+
+  <!-- Authorisation -->
+  <data name="TemplateNotOwnedByIssuer" xml:space="preserve">
+    <value>Template does not belong to this Issuer.</value>
+  </data>
+  <data name="IssuerNotVerified" xml:space="preserve">
+    <value>Issuer is not verified and cannot issue certificates.</value>
+  </data>
+  <data name="CrossTenantMismatch" xml:space="preserve">
+    <value>One or more entities do not belong to the requesting tenant.</value>
+  </data>
+  <data name="RevocationNotAuthorized" xml:space="preserve">
+    <value>You are not authorized to revoke a certificate issued by a different Issuer.</value>
+  </data>
+
+  <!-- Conflict — {0} = existing CertificateId -->
+  <data name="DuplicateActive" xml:space="preserve">
+    <value>An Active certificate already exists for this Professional and Template. Existing CertificateId: {0}</value>
+  </data>
+  <!-- Conflict — {0} = CertificateId, {1} = status -->
+  <data name="AlreadyTerminated" xml:space="preserve">
+    <value>Certificate '{0}' is already in a terminal state ('{1}') and cannot be revoked.</value>
+  </data>
+
+  <!-- Validation -->
+  <data name="RevocationReasonRequired" xml:space="preserve">
+    <value>Revocation reason is required and must not exceed 500 characters.</value>
+  </data>
+</root>

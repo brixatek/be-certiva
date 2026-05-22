@@ -1,0 +1,109 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.Api", "src\Certiva.Api\Certiva.Api.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567801}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.IdentityRegistry", "src\Certiva.IdentityRegistry\Certiva.IdentityRegistry.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567802}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.CertificationEngine", "src\Certiva.CertificationEngine\Certiva.CertificationEngine.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567803}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.VerificationEngine", "src\Certiva.VerificationEngine\Certiva.VerificationEngine.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567804}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.CertificateWallet", "src\Certiva.CertificateWallet\Certiva.CertificateWallet.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567805}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.IssuerPortal", "src\Certiva.IssuerPortal\Certiva.IssuerPortal.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567806}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.NotificationSystem", "src\Certiva.NotificationSystem\Certiva.NotificationSystem.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567807}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.AuditLog", "src\Certiva.AuditLog\Certiva.AuditLog.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567808}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.Infrastructure", "src\Certiva.Infrastructure\Certiva.Infrastructure.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567809}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.Tests.Unit", "tests\Certiva.Tests.Unit\Certiva.Tests.Unit.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567810}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.Tests.Property", "tests\Certiva.Tests.Property\Certiva.Tests.Property.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567811}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Certiva.Tests.Integration", "tests\Certiva.Tests.Integration\Certiva.Tests.Integration.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567812}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567820}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567821}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567804}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567804}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567804}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567812}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567801} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567820}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567802} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567820}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567803} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567820}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567804} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567820}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567805} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567820}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567806} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567820}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567807} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567820}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567808} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567820}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567809} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567820}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567810} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567821}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567811} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567821}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567812} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567821}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1B2C3D4-E5F6-7890-ABCD-EF1234567800}
+	EndGlobalSection
+EndGlobal
